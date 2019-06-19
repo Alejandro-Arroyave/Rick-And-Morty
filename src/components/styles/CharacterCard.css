@@ -1,0 +1,25 @@
+.characterCard {
+  position: relative;
+}
+
+.characterCard__Text {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 70px;
+  background-color: black;
+  opacity: 0.8;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.characterCard__Text > p {
+  opacity: 1;
+}
+
+.characterCard:hover {
+    opacity: 0.8;
+}
