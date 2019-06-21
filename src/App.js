@@ -1,13 +1,16 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import "./App.css";
 import HomePage from "./pages/HomePage";
+import PageNotFound from "./pages/PageNotFound";
+
+import "./App.css";
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route component={PageNotFound} />
       </Switch>
     </BrowserRouter>
   );

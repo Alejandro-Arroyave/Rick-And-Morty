@@ -1,8 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Concert+One&display=swap");
+
 
 body {
   font-family: "Josefin Sans", sans-serif;
   background-color: #181716;
   background-image: url("images/stars.svg");
   background-repeat: repeat;
+}
+
+h1 {
+  font-family: "Concert One", cursive;
 }

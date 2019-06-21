@@ -5,6 +5,8 @@
 .characterCard__Text {
   position: absolute;
   bottom: 0px;
+  left: 0px;
+  right: 0px;
   width: 100%;
   height: 70px;
   background-color: black;
@@ -14,6 +16,7 @@
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  z-index: 1;
 }
 
 .characterCard__Text > p {
@@ -22,4 +25,12 @@
 
 .characterCard:hover {
     opacity: 0.8;
+}
+
+.fig{
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left:0px;
+  right: 0px;
 }
