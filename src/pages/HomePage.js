@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../components/NavBar";
-import CharacterCard from "../components/CharacterCard";
+import CharactersList from "../components/CharactersList";
 
 import "./styles/HomePage.css";
 
@@ -25,13 +25,25 @@ class HomePage extends React.Component {
         `https://rickandmortyapi.com/api/character/?page=${this.state.nextPage}`
       );
       const data = await response.json();
-      this.setState({ loading: false, data: data });
+
+      this.setState({
+        loading: false,
+        data: { info: data.info, results: data.results }
+      });
     } catch (error) {
       this.setState({ loading: false, error: error });
     }
   };
 
   render() {
+    if (this.state.loading) {
+      return <h1>Loading...</h1>;
+    }
+
+    if (this.state.error) {
+      return <h1>Error: {this.state.error.message}</h1>;
+    }
+
     return (
       <div>
         <NavBar />
@@ -43,13 +55,9 @@ class HomePage extends React.Component {
             Select your favorite characters
           </h1>
         </div>
-          <ul className="row">
-            {this.state.data.results.map(character => (
-              <li className="col-md-4 mb-5 listItems" key={character.id}>
-                <CharacterCard character={character} />
-              </li>
-            ))}
-          </ul>
+        <div className="homePage__List">
+          <CharactersList data={this.state.data} />
+        </div>
       </div>
     );
   }

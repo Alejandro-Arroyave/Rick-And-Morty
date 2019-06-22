@@ -1,36 +1,27 @@
-.characterCard {
-  position: relative;
+.characterCard{
+  background-color: white;
+  border-radius: 15px;
+  text-decoration: none;
+  color: black;
+  width: 300px;
+  padding: 0px;
 }
 
-.characterCard__Text {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  width: 100%;
-  height: 70px;
-  background-color: black;
+.characterCard:hover{
   opacity: 0.8;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-  z-index: 1;
+  text-decoration: none;
+  color: inherit;
 }
 
-.characterCard__Text > p {
-  opacity: 1;
+.characterCard__Text{
+  padding-left: 10px;
+  padding-top: 10px;
 }
 
-.characterCard:hover {
-    opacity: 0.8;
+.characterCard__Text > p{
+  color: blueviolet;
 }
 
 .fig{
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left:0px;
-  right: 0px;
+  border-radius: 15px 15px 0px 0px;
 }

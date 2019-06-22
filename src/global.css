@@ -1,14 +1,19 @@
 @import url("https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Concert+One&display=swap");
-
+@import url('https://fonts.googleapis.com/css?family=Varela+Round&display=swap');
 
 body {
   font-family: "Josefin Sans", sans-serif;
   background-color: #181716;
   background-image: url("images/stars.svg");
   background-repeat: repeat;
+  overflow-x: hidden;
 }
 
 h1 {
   font-family: "Concert One", cursive;
+}
+
+h4 {
+  font-family: 'Varela Round', sans-serif;
 }

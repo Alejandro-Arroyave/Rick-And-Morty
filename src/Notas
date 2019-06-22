@@ -1,0 +1,2 @@
+Con hooks puedo encapsular la lógica de llamada a la API para que se llame un método en
+el componentDidMount de cada página y no se tenga que implementar en cada una

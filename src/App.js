@@ -1,15 +1,19 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomePage from "./pages/HomePage";
+import CharacterDetailsPage from "./pages/CharacterDetailsPage";
 import PageNotFound from "./pages/PageNotFound";
-
-import "./App.css";
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route
+          exact
+          path="/CharacterCard/:characterId"
+          component={CharacterDetailsPage}
+        />
         <Route component={PageNotFound} />
       </Switch>
     </BrowserRouter>

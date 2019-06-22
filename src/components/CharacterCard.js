@@ -3,24 +3,28 @@ import { Link } from "react-router-dom";
 
 import "./styles/CharacterCard.css";
 
-import michael from "../images/michael.jpeg";
-
 function CharacterCard(props) {
   const { character } = props;
+
+  if (character === undefined) {
+    return null;
+  }
+
   return (
-    <Link
-      to="#"
-      className="characterCard"
-      // style={{ backgroundImage: `url(${character.image})` }}
-    >
-      <figure className="fig">
-        <img src={character.image} alt="" />
-      </figure>
-      <div className="characterCard__Text">
-        <h4>{character.name}</h4>
-        <p>{character.species}</p>
-      </div>
-    </Link>
+    <div className="characterCard">
+      <Link
+        className="text-reset text-decoration-none"
+        to={`/CharacterCard/${character.id}`}
+      >
+        <img src={character.image} className="fig" alt="" />
+        <div className="characterCard__Text">
+          <h4 className="font-weight-bold">{character.name}</h4>
+          <p>
+            #{character.species} #{character.location.name}
+          </p>
+        </div>
+      </Link>
+    </div>
   );
 }
 

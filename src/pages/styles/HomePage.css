@@ -22,13 +22,6 @@
   text-shadow: 12px 12px 4px darkgray;
 }
 
-.prueba {
-  padding: 30px;
-  display: flex;
-  justify-content: center;
-}
-
-.listItems{
-  min-width: 400px;
-  min-height: 300px;
+.homePage__List {
+  margin-left: 25px;
 }
