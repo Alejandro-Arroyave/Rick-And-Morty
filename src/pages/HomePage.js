@@ -21,6 +21,7 @@ class HomePage extends React.Component {
 
   fetchCharacters = async () => {
     try {
+      this.setState({ loading: true });
       const response = await fetch(
         `https://rickandmortyapi.com/api/character/?page=${this.state.nextPage}`
       );
@@ -28,7 +29,11 @@ class HomePage extends React.Component {
 
       this.setState({
         loading: false,
-        data: { info: data.info, results: data.results }
+        data: {
+          info: data.info,
+          results: [].concat(this.setState.data.results, data.results)
+        },
+        nextPage: this.state.nextPage + 1
       });
     } catch (error) {
       this.setState({ loading: false, error: error });
@@ -58,6 +63,12 @@ class HomePage extends React.Component {
         <div className="homePage__List">
           <CharactersList data={this.state.data} />
         </div>
+        <button
+          className="btn btn-normal homePage__Button"
+          onClick={this.fetchCharacters()}
+        >
+          Show more characters!!
+        </button>
       </div>
     );
   }

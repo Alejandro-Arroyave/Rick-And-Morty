@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./styles/CharactersList.css";
-
 import CharacterCard from "./CharacterCard";
 
 function CharacterList(props) {

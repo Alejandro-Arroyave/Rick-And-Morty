@@ -7,13 +7,13 @@ function Navbar() {
   return (
     <div className="NavBar">
       <Link to="/" className="NavBar__ref">
-        Inicio
+        Home
       </Link>
       <Link to="#" className="NavBar__ref">
-        Favoritos
+        Favorites
       </Link>
       <Link to="#" className="NavBar__ref font-weight-bold">
-        Iniciar sesión
+        Log In
       </Link>
     </div>
   );

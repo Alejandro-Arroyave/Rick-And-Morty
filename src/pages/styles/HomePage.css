@@ -25,3 +25,7 @@
 .homePage__List {
   margin-left: 25px;
 }
+
+.homePage__Button{
+  width: 100%;
+}

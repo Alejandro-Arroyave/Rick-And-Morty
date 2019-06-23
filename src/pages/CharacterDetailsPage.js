@@ -3,6 +3,7 @@ import React from "react";
 import "./styles/CharacterDetailsPage.css";
 
 import NavBar from "../components/NavBar";
+import CharacterCardDetails from "../components/CharacterCardDetails";
 
 class CharacterDetailsPage extends React.Component {
   constructor() {
@@ -45,11 +46,12 @@ class CharacterDetailsPage extends React.Component {
     if (this.state.error != null) {
       return <h1>Error: {this.state.error.message}</h1>;
     }
+    console.log(this.state.data.results);
     return (
       <div>
         <NavBar />
         <div className="CharacterDetails">
-          {/* <img src={this.state.data.results.image} alt=""/> */}
+          <CharacterCardDetails data={this.state.data.results} />
         </div>
       </div>
     );
