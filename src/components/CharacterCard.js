@@ -6,9 +6,9 @@ import "./styles/CharacterCard.css";
 function CharacterCard(props) {
   const { character } = props;
 
-  if (character === undefined) {
-    return null;
-  }
+  // if (character === undefined) {
+  //   return null;
+  // }
 
   return (
     <div className="characterCard">
