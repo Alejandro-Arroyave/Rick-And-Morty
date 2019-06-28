@@ -36,14 +36,13 @@ function CharacterCard(props) {
   const character = props.data;
   const gender = character.gender;
   const status = character.status;
-  console.log(character)
   return (
     <React.Fragment>
       <div className="characterCardDetails">
         <img
           src={character.image}
           className="characterCardDetails__Image"
-          alt="Character image"
+          alt="Character"
         />
         <div className="row characterCardDetails__Row">
           <div className="col characterCardDetails__Info">

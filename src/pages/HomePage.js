@@ -39,7 +39,7 @@ class HomePage extends React.Component {
   };
 
   render() {
-    if (this.state.loading && this.state.nextPage == 1) {
+    if (this.state.loading && this.state.nextPage === 1) {
       return (
         <div className="d-flex justify-content-center">
           <Loader />
