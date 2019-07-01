@@ -26,6 +26,9 @@
   margin-left: 25px;
 }
 
-.homePage__Button{
-  width: 100%;
+.homePage__Buttons{
+  justify-content: space-between;
+  padding: 30px;
+  padding-left: 50px;
+  padding-right: 50px;
 }

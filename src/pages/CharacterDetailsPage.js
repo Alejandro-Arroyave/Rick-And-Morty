@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import "./styles/CharacterDetailsPage.css";
@@ -6,46 +6,26 @@ import "./styles/CharacterDetailsPage.css";
 import NavBar from "../components/NavBar";
 import Emoji from "../components/Emoji";
 import CharacterCardDetails from "../components/CharacterCardDetails";
-
-
+import Loader from "../components/Loader";
+import { useCallApi } from "../Hooks/UseCallApi";
 
 function CharacterDetailsPage(props) {
-
-  const [data, setData] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  async function fetchCharacter() {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(
-        `https://rickandmortyapi.com/api/character/${
-          props.match.params.characterId
-        }`
-      );
-      const data = await response.json();
-      console.log(data);
-      setData(data);
-      setLoading(false);
-    } catch (error) {
-      setError(error);
-      setLoading(false);
-    }
-  }
-    
-  useEffect(() => {
-    fetchCharacter();
-  }, []);
+  const { loading, data, error } = useCallApi(
+    `https://rickandmortyapi.com/api/character/${
+      props.match.params.characterId
+    }`
+  );
 
   if (loading) {
-    return <h1>Loading</h1>;
+    return(
+      <div className="d-flex justify-content-center">
+        <Loader />
+      </div>
+    );
   }
   if (error != null) {
-    return <h1>Errorer: {error.message}</h1>;
+    return <h1>Error: {error.message}</h1>;
   }
-  console.log(data);
-  console.log("aas");
   return (
     <React.Fragment>
       <NavBar />

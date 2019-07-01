@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import CharacterDetailsPage from "./pages/CharacterDetailsPage";
+import FavoriteCharactersPage from "./pages/FavoriteCharactersPage";
 import PageNotFound from "./pages/PageNotFound";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           path="/CharacterCard/:characterId"
           component={CharacterDetailsPage}
         />
+        <Route exact path="/favorites" component={FavoriteCharactersPage}/>
         <Route component={PageNotFound} />
       </Switch>
     </BrowserRouter>

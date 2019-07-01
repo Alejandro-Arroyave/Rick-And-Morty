@@ -9,7 +9,7 @@ function Navbar() {
       <Link to="/" className="NavBar__ref">
         Home
       </Link>
-      <Link to="#" className="NavBar__ref">
+      <Link to="/favorites" className="NavBar__ref">
         Favorites
       </Link>
       <Link to="#" className="NavBar__ref font-weight-bold">
