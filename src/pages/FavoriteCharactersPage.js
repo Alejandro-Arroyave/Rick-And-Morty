@@ -5,23 +5,24 @@ import NavBar from "../components/NavBar";
 import CharactersList from "../components/CharactersList";
 import MiniLoader from "../components/MiniLoader";
 import Loader from "../components/Loader";
-import { useCallApi } from "../Hooks/UseCallApi";
+import { useCallApi } from "../Functions/Hooks/UseCallApi";
 
-function getFavoriteCharactersUrl(){
-  const CharactersID = [1,2,7,35,85,12,98,154];
+function getFavoriteCharactersUrl() {
+  const CharactersID = [1, 2, 7, 35, 85, 12, 98, 154];
   var cad = "";
   CharactersID.forEach(element => {
     cad = cad + element.toString() + ",";
   });
-  return "https://rickandmortyapi.com/api/character/" + cad.substring(0, cad.length-1);
+  return (
+    "https://rickandmortyapi.com/api/character/" +
+    cad.substring(0, cad.length - 1)
+  );
 }
 
 function FavoriteCharactersPage() {
-  console.log(getFavoriteCharactersUrl())
-  const { loading, data, error } = useCallApi(
-    getFavoriteCharactersUrl()
-  );
-  console.log(data)
+  console.log(getFavoriteCharactersUrl());
+  const { loading, data, error } = useCallApi(getFavoriteCharactersUrl());
+  console.log(data);
 
   if (loading) {
     return (

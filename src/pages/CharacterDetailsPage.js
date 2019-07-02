@@ -7,7 +7,7 @@ import NavBar from "../components/NavBar";
 import Emoji from "../components/Emoji";
 import CharacterCardDetails from "../components/CharacterCardDetails";
 import Loader from "../components/Loader";
-import { useCallApi } from "../Hooks/UseCallApi";
+import { useCallApi } from "../Functions/Hooks/UseCallApi";
 
 function CharacterDetailsPage(props) {
   const { loading, data, error } = useCallApi(
@@ -17,7 +17,7 @@ function CharacterDetailsPage(props) {
   );
 
   if (loading) {
-    return(
+    return (
       <div className="d-flex justify-content-center">
         <Loader />
       </div>

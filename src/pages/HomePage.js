@@ -5,7 +5,7 @@ import NavBar from "../components/NavBar";
 import CharactersList from "../components/CharactersList";
 import MiniLoader from "../components/MiniLoader";
 import Loader from "../components/Loader";
-import { useCallApi } from "../Hooks/UseCallApi";
+import { useCallApi } from "../Functions/Hooks/UseCallApi";
 
 var data2 = [];
 

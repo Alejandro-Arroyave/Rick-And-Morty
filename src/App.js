@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import CharacterDetailsPage from "./pages/CharacterDetailsPage";
 import FavoriteCharactersPage from "./pages/FavoriteCharactersPage";
+import LoginPage from "./pages/LoginPage";
+import SigninPage from "./pages/SigninPage";
 import PageNotFound from "./pages/PageNotFound";
 
 function App() {
@@ -15,32 +17,13 @@ function App() {
           path="/CharacterCard/:characterId"
           component={CharacterDetailsPage}
         />
-        <Route exact path="/favorites" component={FavoriteCharactersPage}/>
+        <Route exact path="/favorites" component={FavoriteCharactersPage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/signin" component={SigninPage} />
         <Route component={PageNotFound} />
       </Switch>
     </BrowserRouter>
   );
 }
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;

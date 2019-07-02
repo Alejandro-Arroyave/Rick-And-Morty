@@ -12,7 +12,7 @@ function Navbar() {
       <Link to="/favorites" className="NavBar__ref">
         Favorites
       </Link>
-      <Link to="#" className="NavBar__ref font-weight-bold">
+      <Link to="/login" className="NavBar__ref font-weight-bold">
         Log In
       </Link>
     </div>

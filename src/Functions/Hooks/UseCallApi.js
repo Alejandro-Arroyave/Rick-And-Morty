@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export function useCallApi(apiUrl, previousData = []) {
-  const [data, setData] = useState({ });
+  const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
