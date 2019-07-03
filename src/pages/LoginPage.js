@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import ErrorModal from "../components/ErrorModal";
 import { useForm } from "../Functions/Hooks/UseForm";
-import { Login } from "../Functions/FirebaseAuth";
+import { Login, AuthComponent } from "../Functions/FirebaseAuth";
 
 import RickAndMortyLogo from "../images/RickAndMortyLogo.png";
 
@@ -22,7 +22,7 @@ function LoginPage() {
     try {
       Login(values.email, values.password);
     } catch (error) {
-      console.log("entro al catch")
+      console.log("entro al catch");
       setError(error);
       setIsModalOpen(true);
     }
@@ -34,8 +34,9 @@ function LoginPage() {
       <div className="d-flex justify-content-center p-1">
         <img src={RickAndMortyLogo} alt="" />
       </div>
-      <div className="d-flex justify-content-center">
-        <form align="center" onSubmit={handleSubmit}>
+      <div className="d-flex flex-column align-items-center">
+        <h1>Let's log in</h1>
+        {/* <form align="center" onSubmit={handleSubmit}>
           <h1>Put your email here:</h1>
           <input
             value={values.email}
@@ -65,11 +66,12 @@ function LoginPage() {
           onClose={() => {
             handleCloseModal();
           }}
-        />
+        /> */}
+        <AuthComponent />
       </div>
-      <Link to="/signin" className="signIn d-flex justify-content-center">
+      {/* <Link to="/signin" className="signIn d-flex justify-content-center">
         Sign in
-      </Link>
+      </Link> */}
     </React.Fragment>
   );
 }
