@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import * as ROUTES from "../constants/Routes";
 
 import "./styles/PageNotFound.css";
 
@@ -12,7 +13,9 @@ function PageNotFound() {
     <div>
       <div className="PageNotFound col-11">
         <div className="PageNotFound__Text">
-          <h1>This page doesn't exist <Emoji symbol="💀"/></h1>
+          <h1>
+            This page doesn't exist <Emoji symbol="💀" />
+          </h1>
           <br />
           <h2>Not in this universe...</h2>
         </div>
@@ -24,8 +27,8 @@ function PageNotFound() {
           />
         </figure>
       </div>
-      <div className="PageNotFound__Button"> 
-        <Link to="/" className="btn btn-normal">
+      <div className="PageNotFound__Button">
+        <Link to={ROUTES.HOME} className="btn btn-normal">
           &#60; Back to home
         </Link>
       </div>

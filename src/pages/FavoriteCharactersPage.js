@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import "./styles/HomePage.css";
+
+import {withAuthorization} from "../Firebase/Session"
 
 import NavBar from "../components/NavBar";
 import CharactersList from "../components/CharactersList";
 import MiniLoader from "../components/MiniLoader";
 import Loader from "../components/Loader";
+
 import { useCallApi } from "../Functions/Hooks/UseCallApi";
+
+import "./styles/HomePage.css";
 
 function getFavoriteCharactersUrl() {
   const CharactersID = [1, 2, 7, 35, 85, 12, 98, 154];
@@ -54,4 +58,6 @@ function FavoriteCharactersPage() {
   );
 }
 
-export default FavoriteCharactersPage;
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition)(FavoriteCharactersPage);

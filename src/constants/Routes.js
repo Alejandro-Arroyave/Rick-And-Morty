@@ -1,0 +1,5 @@
+export const HOME = "/"
+export const CHARACTERCARD = "/CharacterCard"
+export const FAVORITES = "/favorites"
+export const LOGIN = "/login"
+export const SIGNUP = "/signup"

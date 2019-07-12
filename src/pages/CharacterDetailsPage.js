@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import * as ROUTES from "../constants/Routes";
 
 import "./styles/CharacterDetailsPage.css";
 
@@ -35,7 +36,7 @@ function CharacterDetailsPage(props) {
       <div className="row">
         <div className="col-8 characterCardDetails__Container" />
         <div className="col-4 characterCardDetails__Container">
-          <Link to="/" className="btn btn-normal">
+          <Link to={ROUTES.HOME} className="btn btn-normal">
             &#60; Back
           </Link>
           <button className="btn btn-special">

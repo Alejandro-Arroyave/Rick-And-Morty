@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+
+import { withFirebase } from "../Firebase";
+import * as ROUTES from "../constants/Routes";
 
 import NavBar from "../components/NavBar";
 import ErrorModal from "../components/ErrorModal";
 import { useForm } from "../Functions/Hooks/UseForm";
-import { Login, AuthComponent } from "../Functions/FirebaseAuth";
 
 import RickAndMortyLogo from "../images/RickAndMortyLogo.png";
 
-function LoginPage() {
+function LoginPage(props) {
   const { values, handleChange, handleSubmit } = useForm(login);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,15 +21,14 @@ function LoginPage() {
   }
 
   function login() {
-    try {
-      Login(values.email, values.password);
-    } catch (error) {
-      console.log("entro al catch");
-      setError(error);
-      setIsModalOpen(true);
-    }
+    props.firebase
+      .doSignInWithEmailAndPassword(values.email, values.password)
+      .then(() => props.history.push(ROUTES.HOME))
+      .catch(error => {
+        setError(error);
+        setIsModalOpen(true);
+      });
   }
-
   return (
     <React.Fragment>
       <NavBar />
@@ -36,7 +37,7 @@ function LoginPage() {
       </div>
       <div className="d-flex flex-column align-items-center">
         <h1>Let's log in</h1>
-        {/* <form align="center" onSubmit={handleSubmit}>
+        <form align="center" onSubmit={handleSubmit}>
           <h1>Put your email here:</h1>
           <input
             value={values.email}
@@ -62,18 +63,17 @@ function LoginPage() {
         </form>
         <ErrorModal
           error={error}
-          isOpen={isModalOpen} 
+          isOpen={isModalOpen}
           onClose={() => {
             handleCloseModal();
           }}
-        /> */}
-        <AuthComponent />
+        />
       </div>
-      {/* <Link to="/signin" className="signIn d-flex justify-content-center">
-        Sign in
-      </Link> */}
+      <Link to={ROUTES.SIGNUP} className="signIn d-flex justify-content-center">
+        Sign up
+      </Link>
     </React.Fragment>
   );
 }
 
-export default LoginPage;
+export default withRouter(withFirebase(LoginPage));

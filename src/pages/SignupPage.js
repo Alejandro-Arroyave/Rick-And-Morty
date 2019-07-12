@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import "./styles/AuthPages.css";
+
+import { withFirebase } from "../Firebase";
+import * as ROUTES from "../constants/Routes";
 
 import NavBar from "../components/NavBar";
 import ErrorModal from "../components/ErrorModal";
 import { useForm } from "../Functions/Hooks/UseForm";
-import { Signin } from "../Functions/FirebaseAuth";
 
-function SigninPage() {
-  const { values, handleChange, handleSubmit } = useForm(signin);
+function SignupPage(props) {
+  const { values, handleChange, handleSubmit } = useForm(signup);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState({ code: "", message: "" });
@@ -16,14 +19,24 @@ function SigninPage() {
     setIsModalOpen(false);
   }
 
-  function signin() {
-    try {
-      Signin(values.email, values.password, values.password2);
-    } catch (e) {
-      console.log("entro al catch")
-      setError(e);
-      setIsModalOpen(true);
-    }
+  // function signup() {
+  //   try {
+  //     Signin(values.email, values.password, values.password2);
+  //   } catch (e) {
+  //     console.log("entro al catch")
+  //     setError(e);
+  //     setIsModalOpen(true);
+  //   }
+  // }
+
+  function signup() {
+    props.firebase
+      .doCreateUserWithEmailAndPassword(values.email, values.password)
+      .then(() => props.history.push(ROUTES))
+      .catch(error => {
+        setError(error);
+        setIsModalOpen(true);
+      });
   }
 
   return (
@@ -67,7 +80,7 @@ function SigninPage() {
             required
           />
           <div className="d-flex justify-content-center">
-            <button className="btn btn-normal">Sign In!</button>
+            <button className="btn btn-normal">Sign Up!</button>
           </div>
         </form>
         <ErrorModal
@@ -82,4 +95,4 @@ function SigninPage() {
   );
 }
 
-export default SigninPage;
+export default withRouter(withFirebase(SignupPage));
