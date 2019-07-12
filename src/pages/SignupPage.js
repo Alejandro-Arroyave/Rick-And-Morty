@@ -19,20 +19,11 @@ function SignupPage(props) {
     setIsModalOpen(false);
   }
 
-  // function signup() {
-  //   try {
-  //     Signin(values.email, values.password, values.password2);
-  //   } catch (e) {
-  //     console.log("entro al catch")
-  //     setError(e);
-  //     setIsModalOpen(true);
-  //   }
-  // }
-
   function signup() {
+    const { email, password } = values;
     props.firebase
-      .doCreateUserWithEmailAndPassword(values.email, values.password)
-      .then(() => props.history.push(ROUTES))
+      .doCreateUserWithEmailAndPassword(email, password)
+      .then(() => props.history.push(ROUTES.HOME))
       .catch(error => {
         setError(error);
         setIsModalOpen(true);

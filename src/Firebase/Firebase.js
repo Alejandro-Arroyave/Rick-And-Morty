@@ -27,7 +27,6 @@ class Firebase {
 
   doSignOut = () => {
     this.auth.signOut();
-    console.log("sali");
   };
 
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
@@ -39,6 +38,20 @@ class Firebase {
   user = uid => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref("users");
+
+  writeFavoritesData = favorites => {
+    this.db.ref("favorites").set(favorites);
+  };
+
+  readFavoritesData = () => {
+    var favorites = null;
+    var path = this.db.ref("favorites");
+    path.on("value", snapshot => {
+      favorites = snapshot.val();
+    });
+    console.log(favorites)
+    return favorites;
+  };
 }
 
 export default Firebase;

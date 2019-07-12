@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {withAuthorization} from "../Firebase/Session"
 
 import NavBar from "../components/NavBar";
 import CharactersList from "../components/CharactersList";
-import MiniLoader from "../components/MiniLoader";
 import Loader from "../components/Loader";
 
 import { useCallApi } from "../Functions/Hooks/UseCallApi";
@@ -23,10 +22,13 @@ function getFavoriteCharactersUrl() {
   );
 }
 
-function FavoriteCharactersPage() {
-  console.log(getFavoriteCharactersUrl());
+function FavoriteCharactersPage(props) {
   const { loading, data, error } = useCallApi(getFavoriteCharactersUrl());
-  console.log(data);
+
+  // useEffect(() => {
+  //   const a = props.firebase.readFavoritesData();
+  //   console.log(a)
+  // })
 
   if (loading) {
     return (
