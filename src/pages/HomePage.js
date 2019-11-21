@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./styles/HomePage.css";
 
-import NavBar from "../components/NavBar";
 import CharactersList from "../components/CharactersList";
 import MiniLoader from "../components/MiniLoader";
 import Loader from "../components/Loader";
@@ -36,10 +35,8 @@ function HomePage() {
   if (error) {
     return <h1>Error: {error.message}</h1>;
   }
-  console.log(data);
   return (
     <React.Fragment>
-      <NavBar />
       <div className="homePage__Hero" />
       <div className="homePage__Title">
         <h1>

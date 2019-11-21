@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-import {withAuthorization} from "../Firebase/Session"
+import { withAuthorization } from "../Firebase/Session";
+import { withFirebase } from "../Firebase";
 
-import NavBar from "../components/NavBar";
 import CharactersList from "../components/CharactersList";
 import Loader from "../components/Loader";
 
@@ -10,10 +10,11 @@ import { useCallApi } from "../Functions/Hooks/UseCallApi";
 
 import "./styles/HomePage.css";
 
-function getFavoriteCharactersUrl() {
-  const CharactersID = [1, 2, 7, 35, 85, 12, 98, 154];
+function getFavoriteCharactersUrl(charactersID) {
+
   var cad = "";
-  CharactersID.forEach(element => {
+  console.log();
+  charactersID.forEach(element => {
     cad = cad + element.toString() + ",";
   });
   return (
@@ -22,15 +23,34 @@ function getFavoriteCharactersUrl() {
   );
 }
 
+function useGetDatabase(firebase) {
+  const [characters, setCharacters] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    function get() {
+      firebase
+        .getFavoriteCharacters()
+        .then(function(snapshot) {
+          setCharacters(snapshot.val());
+          setLoading(false);
+        });
+    }
+    get();
+  }, []);
+  return { characters, loading };
+}
+
 function FavoriteCharactersPage(props) {
-  const { loading, data, error } = useCallApi(getFavoriteCharactersUrl());
+  const { characters, loading } = useGetDatabase(props.firebase);
+  console.log(characters);
+  console.log(getFavoriteCharactersUrl(characters));
+  const { loading: loadingApi, data, error } = useCallApi(
+    getFavoriteCharactersUrl(characters)
+  );
+  console.log(data)
 
-  // useEffect(() => {
-  //   const a = props.firebase.readFavoritesData();
-  //   console.log(a)
-  // })
-
-  if (loading) {
+  if (loadingApi || loading) {
     return (
       <div className="d-flex justify-content-center">
         <Loader />
@@ -44,7 +64,6 @@ function FavoriteCharactersPage(props) {
 
   return (
     <React.Fragment>
-      <NavBar />
       <div className="homePage__Hero" />
       <div className="homePage__Title">
         <h1>
@@ -62,4 +81,6 @@ function FavoriteCharactersPage(props) {
 
 const condition = authUser => !!authUser;
 
-export default withAuthorization(condition)(FavoriteCharactersPage);
+export default withAuthorization(condition)(
+  withFirebase(FavoriteCharactersPage)
+);

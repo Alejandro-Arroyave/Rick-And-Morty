@@ -5,7 +5,6 @@ import "./styles/AuthPages.css";
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../constants/Routes";
 
-import NavBar from "../components/NavBar";
 import ErrorModal from "../components/ErrorModal";
 import { useForm } from "../Functions/Hooks/UseForm";
 
@@ -32,7 +31,6 @@ function SignupPage(props) {
 
   return (
     <React.Fragment>
-      <NavBar />
       <div className="d-flex justify-content-center p-1">
         <h1>Let's create a account for you</h1>
       </div>

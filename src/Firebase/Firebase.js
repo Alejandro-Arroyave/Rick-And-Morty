@@ -2,12 +2,12 @@ import app from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 
-const firebaseConfig = {
+var firebaseConfig = {
   apiKey: "AIzaSyCmW0jabJQTxdFr857r-icIP9Fs9bXBYRk",
   authDomain: "rickandmorty-595ab.firebaseapp.com",
   databaseURL: "https://rickandmorty-595ab.firebaseio.com",
   projectId: "rickandmorty-595ab",
-  storageBucket: "",
+  storageBucket: "rickandmorty-595ab.appspot.com",
   messagingSenderId: "957630051317",
   appId: "1:957630051317:web:a869158ec5c7b334"
 };
@@ -35,23 +35,31 @@ class Firebase {
 
   //Firebase Database
 
-  user = uid => this.db.ref(`users/${uid}`);
+  getFavoriteCharacters = () =>
+    this.db
+      .ref("/users/" + this.auth.currentUser.uid + "/favoriteCharacters/")
+      .once("value");
 
-  users = () => this.db.ref("users");
-
-  writeFavoritesData = favorites => {
-    this.db.ref("favorites").set(favorites);
-  };
-
-  readFavoritesData = () => {
-    var favorites = null;
-    var path = this.db.ref("favorites");
-    path.on("value", snapshot => {
-      favorites = snapshot.val();
+  setNewCharacter = characterId =>
+    this.getFavoriteCharacters().then(function(snapshot) {
+      this.characters = snapshot.val();
     });
-    console.log(favorites)
-    return favorites;
+
+  setNewComment = (characterId, commentText) => {
+    var newCommentKey = this.db
+      .ref()
+      .child("/comments/" + characterId)
+      .push().key;
+    var newComment = {
+      id: newCommentKey,
+      text: commentText
+    };
+    var updates = {};
+    updates["/comments/" + characterId + "/" + newCommentKey] = newComment;
+    return this.db.ref().update(updates);
   };
+
+  getComments = characterId => this.db.ref("/comments/" + characterId);
 }
 
 export default Firebase;

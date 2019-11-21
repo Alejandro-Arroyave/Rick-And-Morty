@@ -4,7 +4,6 @@ import { Link, withRouter } from "react-router-dom";
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../constants/Routes";
 
-import NavBar from "../components/NavBar";
 import ErrorModal from "../components/ErrorModal";
 import { useForm } from "../Functions/Hooks/UseForm";
 
@@ -31,7 +30,6 @@ function LoginPage(props) {
   }
   return (
     <React.Fragment>
-      <NavBar />
       <div className="d-flex justify-content-center p-1">
         <img src={RickAndMortyLogo} alt="" />
       </div>
@@ -69,7 +67,7 @@ function LoginPage(props) {
           }}
         />
       </div>
-      <Link to={ROUTES.SIGNUP} className="signIn d-flex justify-content-center">
+      <Link to={ROUTES.SIGNUP} className="d-flex justify-content-center mb-4">
         Sign up
       </Link>
     </React.Fragment>

@@ -2,6 +2,8 @@
   margin: 20px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  width: 80%;
   color: white;
   background-color: rgb(35, 35, 35);
   border-radius: 10px 10px 10px 10px;
