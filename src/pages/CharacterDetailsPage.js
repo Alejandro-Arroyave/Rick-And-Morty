@@ -6,10 +6,25 @@ import "./styles/CharacterDetailsPage.css";
 
 import Emoji from "../components/Emoji";
 import CharacterCardDetails from "../components/CharacterCardDetails";
+import CommentsList from "../components/ComentsList";
 import CommentBox from "../components/CommentBox";
 import Loader from "../components/Loader";
 import { useCallApi } from "../Functions/Hooks/UseCallApi";
 import { withFirebase } from "../Firebase";
+
+function doStructuratedJson(oldJson) {
+  const keys = Object.keys(oldJson);
+  const values = Object.values(oldJson);
+  var messages = [];
+  for (const i in keys) {
+    var messageJson = {
+      id: keys[i],
+      message: values[i]
+    };
+    messages.push(messageJson);
+  }
+  return messages;
+}
 
 function useGetDatabase(firebase, characterId) {
   const [comments, setComments] = useState([]);
@@ -17,9 +32,8 @@ function useGetDatabase(firebase, characterId) {
 
   useEffect(() => {
     function get() {
-      console.log(firebase)
-      firebase.getComments(characterId).on('value',function(snapshot) {
-        console.log(snapshot.val());
+      firebase.getComments(characterId).on("value", function(snapshot) {
+        setComments(doStructuratedJson(snapshot.val()));
         setLoading(false);
       });
     }
@@ -37,7 +51,7 @@ function CharacterDetailsPage(props) {
     props.match.params.characterId
   );
 
-  if (loading || loading) {
+  if (loadingApi || loading) {
     return (
       <div className="d-flex justify-content-center">
         <Loader />
@@ -49,7 +63,6 @@ function CharacterDetailsPage(props) {
   }
 
   const handleClick = () => {
-    console.log(props.firebase.auth.currentUser.uid);
     props.firebase.setNewCharacter(props.match.params.characterId);
   };
 
@@ -70,7 +83,13 @@ function CharacterDetailsPage(props) {
         </div>
       </div>
       <div className="d-flex justify-content-center">
-        <CommentBox characterId={props.match.params.characterId} />
+        <CommentsList
+          data={comments}
+          characterId={props.match.params.characterId}
+        />
+      </div>
+      <div className="d-flex justify-content-center">
+        <CommentBox characterId={props.match.params.characterId}/>
       </div>
     </React.Fragment>
   );

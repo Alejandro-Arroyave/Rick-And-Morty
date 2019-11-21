@@ -6,9 +6,9 @@ import "./styles/CommentBox.css";
 
 function CommentBox(props) {
   const [value, setValue] = useState("");
-
   const handleClick = () => {
     props.firebase.setNewComment(props.characterId, value);
+    setValue("")
   };
   const handleChange = event => {
     setValue(event.target.value);
@@ -17,7 +17,7 @@ function CommentBox(props) {
   if (props.comment) {
     return (
       <div className="comment">
-        <p>{props.comment.text}</p>
+        <p>{props.comment.message}</p>
       </div>
     );
   } else {

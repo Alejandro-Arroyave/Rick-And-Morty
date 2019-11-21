@@ -50,12 +50,8 @@ class Firebase {
       .ref()
       .child("/comments/" + characterId)
       .push().key;
-    var newComment = {
-      id: newCommentKey,
-      text: commentText
-    };
     var updates = {};
-    updates["/comments/" + characterId + "/" + newCommentKey] = newComment;
+    updates["/comments/" + characterId + "/" + newCommentKey] = commentText;
     return this.db.ref().update(updates);
   };
 
