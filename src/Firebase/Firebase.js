@@ -41,9 +41,8 @@ class Firebase {
       .once("value");
 
   setNewCharacter = characterId =>
-    this.getFavoriteCharacters().then(function(snapshot) {
-      this.characters = snapshot.val();
-    });
+    this.db.ref("/users/" + this.auth.currentUser.uid + "/favoriteCharacters/").set([characterId])
+    
 
   setNewComment = (characterId, commentText) => {
     var newCommentKey = this.db

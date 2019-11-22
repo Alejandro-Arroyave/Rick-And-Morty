@@ -5,7 +5,7 @@ import CharacterCard from "./CharacterCard";
 function CharacterList(props) {
   if (Array.isArray(props.data)) {
     return (
-      <ul className="list-unstyled">
+      <ul className="row">
         {props.data.map(character => (
           <li className="col-6 col-md-4" key={character.id}>
             <CharacterCard character={character} />
@@ -15,7 +15,7 @@ function CharacterList(props) {
     );
   } else {
     return (
-      <ul className="list-unstyled">
+      <ul className="row">
         <li className="col-6 col-md-4" key={props.data.id}>
           <CharacterCard character={props.data} />
         </li>

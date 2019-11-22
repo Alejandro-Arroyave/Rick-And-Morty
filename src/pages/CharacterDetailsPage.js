@@ -13,17 +13,21 @@ import { useCallApi } from "../Functions/Hooks/UseCallApi";
 import { withFirebase } from "../Firebase";
 
 function doStructuratedJson(oldJson) {
-  const keys = Object.keys(oldJson);
-  const values = Object.values(oldJson);
-  var messages = [];
-  for (const i in keys) {
-    var messageJson = {
-      id: keys[i],
-      message: values[i]
-    };
-    messages.push(messageJson);
+  if (oldJson) {
+    const keys = Object.keys(oldJson);
+    const values = Object.values(oldJson);
+    var messages = [];
+    for (const i in keys) {
+      var messageJson = {
+        id: keys[i],
+        message: values[i]
+      };
+      messages.push(messageJson);
+    }
+    return messages;
+  } else {
+    return null;
   }
-  return messages;
 }
 
 function useGetDatabase(firebase, characterId) {
@@ -34,6 +38,7 @@ function useGetDatabase(firebase, characterId) {
     function get() {
       firebase.getComments(characterId).on("value", function(snapshot) {
         setComments(doStructuratedJson(snapshot.val()));
+        console.log(snapshot.val());
         setLoading(false);
       });
     }
@@ -82,14 +87,16 @@ function CharacterDetailsPage(props) {
           </button>
         </div>
       </div>
+      {comments != null && (
+        <div className="d-flex justify-content-center">
+          <CommentsList
+            data={comments}
+            characterId={props.match.params.characterId}
+          />
+        </div>
+      )}
       <div className="d-flex justify-content-center">
-        <CommentsList
-          data={comments}
-          characterId={props.match.params.characterId}
-        />
-      </div>
-      <div className="d-flex justify-content-center">
-        <CommentBox characterId={props.match.params.characterId}/>
+        <CommentBox characterId={props.match.params.characterId} />
       </div>
     </React.Fragment>
   );
