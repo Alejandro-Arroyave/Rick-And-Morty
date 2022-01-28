@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { withFirebase } from "../Firebase";
 import * as ROUTES from "../constants/Routes";
 
 import ErrorModal from "../components/ErrorModal";
@@ -10,24 +9,26 @@ import { useForm } from "../Functions/Hooks/UseForm";
 import RickAndMortyLogo from "../images/RickAndMortyLogo.png";
 
 function LoginPage(props) {
-  const { values, handleChange, handleSubmit } = useForm(login);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [error, setError] = useState({ code: "", message: "" });
+  const [error] = useState({ code: "", message: "" });
 
   function handleCloseModal() {
     setIsModalOpen(false);
   }
 
-  function login() {
-    props.firebase
-      .doSignInWithEmailAndPassword(values.email, values.password)
-      .then(() => props.history.push(ROUTES.HOME))
-      .catch(error => {
-        setError(error);
-        setIsModalOpen(true);
-      });
-  }
+  const login = () => {};
+
+  const { values, handleChange, handleSubmit } = useForm(login);
+  // function login() {
+  //   props.firebase
+  //     .doSignInWithEmailAndPassword(values.email, values.password)
+  //     .then(() => props.history.push(ROUTES.HOME))
+  //     .catch((error) => {
+  //       setError(error);
+  //       setIsModalOpen(true);
+  //     });
+  // }
+
   return (
     <React.Fragment>
       <div className="d-flex justify-content-center p-1">
@@ -74,4 +75,4 @@ function LoginPage(props) {
   );
 }
 
-export default withRouter(withFirebase(LoginPage));
+export default LoginPage;

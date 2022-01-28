@@ -1,16 +1,10 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
 import "./styles/AuthPages.css";
-
-import { withFirebase } from "../Firebase";
-import * as ROUTES from "../constants/Routes";
 
 import ErrorModal from "../components/ErrorModal";
 import { useForm } from "../Functions/Hooks/UseForm";
 
 function SignupPage(props) {
-  const { values, handleChange, handleSubmit } = useForm(signup);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState({ code: "", message: "" });
 
@@ -18,16 +12,19 @@ function SignupPage(props) {
     setIsModalOpen(false);
   }
 
-  function signup() {
-    const { email, password } = values;
-    props.firebase
-      .doCreateUserWithEmailAndPassword(email, password)
-      .then(() => props.history.push(ROUTES.HOME))
-      .catch(error => {
-        setError(error);
-        setIsModalOpen(true);
-      });
-  }
+  const signup = () => {};
+
+  const { values, handleChange, handleSubmit } = useForm(signup);
+  // function signup() {
+  //   const { email, password } = values;
+  //   props.firebase
+  //     .doCreateUserWithEmailAndPassword(email, password)
+  //     .then(() => props.history.push(ROUTES.HOME))
+  //     .catch((error) => {
+  //       setError(error);
+  //       setIsModalOpen(true);
+  //     });
+  // }
 
   return (
     <React.Fragment>
@@ -84,4 +81,4 @@ function SignupPage(props) {
   );
 }
 
-export default withRouter(withFirebase(SignupPage));
+export default SignupPage;

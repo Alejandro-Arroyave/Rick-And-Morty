@@ -1,66 +1,57 @@
-import React, { useState, useEffect } from "react";
-
-import { withAuthorization } from "../Firebase/Session";
-import { withFirebase } from "../Firebase";
+import React from "react";
 
 import CharactersList from "../components/CharactersList";
-import Loader from "../components/Loader";
-
-import { useCallApi } from "../Functions/Hooks/UseCallApi";
 
 import "./styles/HomePage.css";
 
-function getFavoriteCharactersUrl(charactersID) {
+// function getFavoriteCharactersUrl(charactersID) {
+//   var cad = "";
+//   console.log();
+//   charactersID.forEach((element) => {
+//     cad = cad + element.toString() + ",";
+//   });
+//   return (
+//     "https://rickandmortyapi.com/api/character/" +
+//     cad.substring(0, cad.length - 1)
+//   );
+// }
 
-  var cad = "";
-  console.log();
-  charactersID.forEach(element => {
-    cad = cad + element.toString() + ",";
-  });
-  return (
-    "https://rickandmortyapi.com/api/character/" +
-    cad.substring(0, cad.length - 1)
-  );
-}
+// function useGetDatabase(firebase) {
+//   const [characters, setCharacters] = useState([]);
+//   const [loading, setLoading] = useState(true);
 
-function useGetDatabase(firebase) {
-  const [characters, setCharacters] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    function get() {
-      firebase
-        .getFavoriteCharacters()
-        .then(function(snapshot) {
-          setCharacters(snapshot.val());
-          setLoading(false);
-        });
-    }
-    get();
-  }, []);
-  return { characters, loading };
-}
+//   useEffect(() => {
+//     function get() {
+//       firebase.getFavoriteCharacters().then(function (snapshot) {
+//         setCharacters(snapshot.val());
+//         setLoading(false);
+//       });
+//     }
+//     get();
+//   }, [firebase]);
+//   return { characters, loading };
+// }
 
 function FavoriteCharactersPage(props) {
-  const { characters, loading } = useGetDatabase(props.firebase);
-  console.log(characters);
-  console.log(getFavoriteCharactersUrl(characters));
-  const { loading: loadingApi, data, error } = useCallApi(
-    getFavoriteCharactersUrl(characters)
-  );
-  console.log(data)
+  const data = [];
+  // const { characters, loading } = useGetDatabase(props.firebase);
+  // const {
+  //   loading: loadingApi,
+  //   data,
+  //   error,
+  // } = useCallApi(getFavoriteCharactersUrl(characters));
 
-  if (loadingApi || loading) {
-    return (
-      <div className="d-flex justify-content-center">
-        <Loader />
-      </div>
-    );
-  }
+  // if (loadingApi || loading) {
+  //   return (
+  //     <div className="d-flex justify-content-center">
+  //       <Loader />
+  //     </div>
+  //   );
+  // }
 
-  if (error) {
-    return <h1>Error: {error.message}</h1>;
-  }
+  // if (error) {
+  //   return <h1>Error: {error.message}</h1>;
+  // }
 
   return (
     <React.Fragment>
@@ -79,8 +70,4 @@ function FavoriteCharactersPage(props) {
   );
 }
 
-const condition = authUser => !!authUser;
-
-export default withAuthorization(condition)(
-  withFirebase(FavoriteCharactersPage)
-);
+export default FavoriteCharactersPage;

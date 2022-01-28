@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../constants/Routes";
 
@@ -10,53 +10,57 @@ import CommentsList from "../components/ComentsList";
 import CommentBox from "../components/CommentBox";
 import Loader from "../components/Loader";
 import { useCallApi } from "../Functions/Hooks/UseCallApi";
-import { withFirebase } from "../Firebase";
 
-function doStructuratedJson(oldJson) {
-  if (oldJson) {
-    const keys = Object.keys(oldJson);
-    const values = Object.values(oldJson);
-    var messages = [];
-    for (const i in keys) {
-      var messageJson = {
-        id: keys[i],
-        message: values[i]
-      };
-      messages.push(messageJson);
-    }
-    return messages;
-  } else {
-    return null;
-  }
-}
+// function doStructuratedJson(oldJson) {
+//   if (oldJson) {
+//     const keys = Object.keys(oldJson);
+//     const values = Object.values(oldJson);
+//     var messages = [];
+//     for (const i in keys) {
+//       var messageJson = {
+//         id: keys[i],
+//         message: values[i],
+//       };
+//       messages.push(messageJson);
+//     }
+//     return messages;
+//   } else {
+//     return null;
+//   }
+// }
 
-function useGetDatabase(firebase, characterId) {
-  const [comments, setComments] = useState([]);
-  const [loading, setLoading] = useState(true);
+// function useGetDatabase(firebase, characterId) {
+//   const [comments, setComments] = useState([]);
+//   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    function get() {
-      firebase.getComments(characterId).on("value", function(snapshot) {
-        setComments(doStructuratedJson(snapshot.val()));
-        console.log(snapshot.val());
-        setLoading(false);
-      });
-    }
-    get();
-  }, []);
-  return { comments, loading };
-}
+//   useEffect(() => {
+//     function get() {
+//       firebase.getComments(characterId).on("value", function (snapshot) {
+//         setComments(doStructuratedJson(snapshot.val()));
+//         console.log(snapshot.val());
+//         setLoading(false);
+//       });
+//     }
+//     get();
+//   }, [characterId, firebase]);
+//   return { comments, loading };
+// }
 
 function CharacterDetailsPage(props) {
-  const { loading: loadingApi, data, error } = useCallApi(
+  const {
+    loading: loadingApi,
+    data,
+    error,
+  } = useCallApi(
     `https://rickandmortyapi.com/api/character/${props.match.params.characterId}`
   );
-  const { comments, loading } = useGetDatabase(
-    props.firebase,
-    props.match.params.characterId
-  );
+  const comments = null;
+  // const { comments, loading } = useGetDatabase(
+  //   props.firebase,
+  //   props.match.params.characterId
+  // );
 
-  if (loadingApi || loading) {
+  if (loadingApi) {
     return (
       <div className="d-flex justify-content-center">
         <Loader />
@@ -68,7 +72,8 @@ function CharacterDetailsPage(props) {
   }
 
   const handleClick = () => {
-    props.firebase.setNewCharacter(props.match.params.characterId);
+    // props.firebase.setNewCharacter(props.match.params.characterId);
+    console.log("Added to favorites");
   };
 
   return (
@@ -102,4 +107,4 @@ function CharacterDetailsPage(props) {
   );
 }
 
-export default withFirebase(CharacterDetailsPage);
+export default CharacterDetailsPage;

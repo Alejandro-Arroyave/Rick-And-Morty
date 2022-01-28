@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import Emoji from "./Emoji";
-import { withFirebase } from "../Firebase";
 
 import "./styles/CommentBox.css";
 
 function CommentBox(props) {
   const [value, setValue] = useState("");
   const handleClick = () => {
-    props.firebase.setNewComment(props.characterId, value);
-    setValue("")
+    // props.firebase.setNewComment(props.characterId, value);
+    console.log("commented");
+    setValue("");
   };
-  const handleChange = event => {
+  const handleChange = (event) => {
     setValue(event.target.value);
   };
 
@@ -44,4 +44,4 @@ function CommentBox(props) {
   }
 }
 
-export default withFirebase(CommentBox);
+export default CommentBox;

@@ -6,7 +6,7 @@ function CommentsList(props) {
   if (Array.isArray(props.data)) {
     return (
       <ul className="list-unstyled">
-        {props.data.map(comment => (
+        {props.data.map((comment) => (
           <li key={comment.id}>
             <CommentBox comment={comment} characterId={props.characterId} />
           </li>
